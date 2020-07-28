@@ -35,10 +35,10 @@ const adapter = new BotFrameworkAdapter({
 
 
 const whatsAppAdapter = new TwilioWhatsAppAdapter({
-    accountSid: 'AC54f3390433d164ae8cd84341e1116f18', // Account SID
-    authToken: '609a1b5549b7f046f62032c157bbe835', // Auth Token
-    phoneNumber: 'whatsapp:+14155238886', // The From parameter consisting of whatsapp: followed by the sending WhatsApp number (using E.164 formatting)
-    endpointUrl: 'https://ee979160a216.ngrok.io/api/messages' // Endpoint URL you configured in the sandbox, used for validation
+    accountSid: 'Add your account SID', // Account SID
+    authToken: ' Auth Token', // Auth Token
+    phoneNumber: 'add your whatsap number', // The From parameter consisting of whatsapp: followed by the sending WhatsApp number (using E.164 formatting)
+    endpointUrl: 'add your endpoint here' // Endpoint URL you configured in the sandbox, used for validation
 });
 
 
