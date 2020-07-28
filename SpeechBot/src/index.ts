@@ -29,8 +29,8 @@ server.listen(3979, () => {
 //Create adapter.
 //See https://aka.ms/about-bot-adapter to learn more about adapters.
 const adapter = new BotFrameworkAdapter({
-    appId: 'e167ca8d-6c99-4984-aa86-16737b73d4cf',
-    appPassword: 'VW.o-W1y9N~8tFy-.yO_pTHkPSo15g3Glm'
+    appId: 'ADD Appid',
+    appPassword: 'Add secret'
 });
 
 
