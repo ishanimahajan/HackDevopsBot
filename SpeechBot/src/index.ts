@@ -8,7 +8,7 @@ import * as path from 'path';
 // config({ path: ENV_FILE });
 
 import * as restify from 'restify';
-
+import { TwilioWhatsAppAdapter } from '@botbuildercommunity/adapter-twilio-whatsapp';
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 import { BotFrameworkAdapter } from 'botbuilder';
@@ -32,6 +32,15 @@ const adapter = new BotFrameworkAdapter({
     appId: 'e167ca8d-6c99-4984-aa86-16737b73d4cf',
     appPassword: 'VW.o-W1y9N~8tFy-.yO_pTHkPSo15g3Glm'
 });
+
+
+const whatsAppAdapter = new TwilioWhatsAppAdapter({
+    accountSid: 'AC54f3390433d164ae8cd84341e1116f18', // Account SID
+    authToken: '609a1b5549b7f046f62032c157bbe835', // Auth Token
+    phoneNumber: 'whatsapp:+14155238886', // The From parameter consisting of whatsapp: followed by the sending WhatsApp number (using E.164 formatting)
+    endpointUrl: 'https://ee979160a216.ngrok.io/api/messages' // Endpoint URL you configured in the sandbox, used for validation
+});
+
 
 // Catch-all for errors.
 const onTurnErrorHandler = async (context, error) => {
@@ -63,10 +72,18 @@ server.get('/hello', (req, res) => {
 })
 
 
-// Listen for incoming requests.
+// // Listen for incoming requests.
+// server.post('/api/messages', (req, res) => {
+//     console.log("Message rcvd!!");
+//     adapter.processActivity(req, res, async (context) => {
+//         await myBot.run(context);
+//     });
+// });
+
+// WhatsApp endpoint for Twilio
 server.post('/api/messages', (req, res) => {
-    console.log("Message rcvd!!");
-    adapter.processActivity(req, res, async (context) => {
+    whatsAppAdapter.processActivity(req, res, async (context) => {
+        // Route to main dialog.
         await myBot.run(context);
     });
 });

@@ -1,16 +1,51 @@
 import * as sdk from 'microsoft-cognitiveservices-speech-sdk';
 import { TurnContext, MessageFactory } from 'botbuilder';
+import axios from 'axios';
+import fs from 'fs';
+import request from 'request';
+//import axios from 'axios';
+
 
 export class SpeechToText {
 
-    private callback: any;
+    async convertspeechToTextWithRestAPI(uniqueKey: string): Promise<string> {
+        return new Promise((resolve, reject) => {
+            var url = 'https://eastus.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US';
+            var header2 = {
+                'Ocp-Apim-Subscription-Key': 'e5de30b9ee4b488592f5b758c7d5a0f3',
+                'Content-type': 'audio/ogg; codecs=opus',
+                'Expect': '100-continue',
+                'Accept': 'application/json'
+            }
+
+            var speechRequestData = {
+                url: url,
+                headers: header2
+            };
+
+            var fileName = "salini-test_" + uniqueKey + ".ogg"
+            fs.createReadStream(fileName).pipe(request.post(speechRequestData, function (error, response, body) {
+                if (error) {
+                    reject(error);
+                } else if (response.statusCode !== 200) {
+                    reject(body);
+                } else {
+
+                    console.log("Body is " + JSON.stringify(body));
+                    fs.unlink(fileName, (err) => { });
+                    resolve(JSON.parse(body).DisplayText);
+                    // resolve(JSON.parse(body).header.name);
+                }
+            }));
+        })
+    }
 
     async convertSpeechToText(audioStream: sdk.PushAudioInputStream, callback: any): Promise<string> {
 
         return new Promise((resolve, reject) => {
             // now create the audio-config pointing to our stream and
             // the speech config specifying the language.
-            this.callback = callback;
+            // this.callback = callback;
             var audioConfig = sdk.AudioConfig.fromStreamInput(audioStream);
             // CongnitiveService Name: HackBot-Speech
             var speechConfig = sdk.SpeechConfig.fromSubscription('e5de30b9ee4b488592f5b758c7d5a0f3', 'eastus');

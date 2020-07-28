@@ -10,6 +10,6 @@ export declare class HackDevOpsBot extends ActivityHandler {
     onMessageHandler(context: TurnContext, next: any): Promise<void>;
     hasAudioAttachement(context: TurnContext): boolean;
     getAudioStreamFromMessage(context: TurnContext): Promise<void>;
+    saveOggFileInServer(contenturl: string, uniqueKey: string): Promise<void>;
     readAudioStream(readableStream: NodeJS.ReadableStream): Promise<PushAudioInputStream>;
-    replyToBot(reply: string): void;
 }

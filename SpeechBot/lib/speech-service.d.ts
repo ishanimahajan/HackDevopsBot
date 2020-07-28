@@ -1,5 +1,5 @@
 import * as sdk from 'microsoft-cognitiveservices-speech-sdk';
 export declare class SpeechToText {
-    private callback;
+    convertspeechToTextWithRestAPI(uniqueKey: string): Promise<string>;
     convertSpeechToText(audioStream: sdk.PushAudioInputStream, callback: any): Promise<string>;
 }
