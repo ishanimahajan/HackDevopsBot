@@ -7,6 +7,7 @@ import * as needle from 'needle';
 import { SpeechToText } from './speech-service';
 import * as sdk from 'microsoft-cognitiveservices-speech-sdk';
 import { PushAudioInputStream } from 'microsoft-cognitiveservices-speech-sdk';
+import { CreateWorkItem } from './workItemInfo';
 export class HackDevOpsBot extends ActivityHandler {
 
 
@@ -46,9 +47,11 @@ export class HackDevOpsBot extends ActivityHandler {
     async onMessageHandler(context: TurnContext, next) {
         //await this.getAudioStreamFromMessage(context)
         //await this.ConvertAudioToText(context);
+        console.log("inside onMessageHandler: "+context.activity.text);
         this.context = context;
         this.next = next;
-        await this.getAudioStreamFromMessage(context);
+        await CreateWorkItem("creating sample task");
+       // await this.getAudioStreamFromMessage(context);
 
         await next();
     }
