@@ -2,8 +2,8 @@ import * as vm from "azure-devops-node-api";
 import * as lim from "azure-devops-node-api/interfaces/LocationsInterfaces";
 
 let  API_URL="https://dev.azure.com/dynamicscrm";
-let API_TOKEN= "inam3oavu5kvtjcjikohkn5oawin5xvqxa7hndzbjrbbxqudm2mq";
-let API_PROJECT = "OneCRM";
+let API_TOKEN= "ADD your personal access token here";
+let API_PROJECT = "Add your project name here";
 /* function getEnv(name: string): string {
     let val = process.env[name];
     if (!val) {
